@@ -1,4 +1,8 @@
 'use client';
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer
+} from 'recharts';
+
 
 import { useState, useEffect } from 'react';
 import { 
@@ -49,6 +53,21 @@ const Navbar = () => {
     { icon: FiFolder, label: 'Pages', href: '/pages' },
   ];
 
+  const monthlySalesData = [
+    { month: 'Jan', sales: 4000 },
+    { month: 'Feb', sales: 3000 },
+    { month: 'Mar', sales: 5000 },
+    { month: 'Apr', sales: 4500 },
+    { month: 'May', sales: 6000 },
+    { month: 'Jun', sales: 7000 },
+    { month: 'Jul', sales: 6500 },
+    { month: 'Aug', sales: 7200 },
+    { month: 'Sep', sales: 5900 },
+    { month: 'Oct', sales: 6300 },
+    { month: 'Nov', sales: 5800 },
+    { month: 'Dec', sales: 8000 },
+  ];
+  
   return (
     <div className="flex h-screen">
       {/* Vertical Menu */}
@@ -122,7 +141,7 @@ const Navbar = () => {
                   alt="Profile"
                   className="w-10 h-10 rounded-full"
                 />
-                <span className="text-gray-700 dark:text-gray-200 font-medium">John Doe</span>
+                <span className="text-gray-700 dark:text-gray-200 font-medium">Tea</span>
               </div>
             </div>
           </div>
@@ -133,7 +152,7 @@ const Navbar = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Customers Box */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-[300px] h-[150px]">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-auto h-auto">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Total Customers</p>
@@ -150,8 +169,8 @@ const Navbar = () => {
             </div>
             
             {/* Orders Box */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-[300px] h-[150px]">
-              <div className="flex items-center justify-between">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-auto h-auto">
+                <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Total Orders</p>
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white mt-1">{orderCount}</h3>
@@ -167,7 +186,7 @@ const Navbar = () => {
             </div>
             
             {/* Monthly Target Box */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-[430px] h-[500px] -ml-18">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-100 h-auto -ml-2">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Monthly Target</p>
@@ -188,6 +207,23 @@ const Navbar = () => {
                     className="bg-purple-500 h-2.5 rounded-full" 
                     style={{ width: `${monthlyTarget}%` }}
                   ></div>
+                  <div className="mt-6">
+
+                 {/* Chart box */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-12 -ml-200 mr-100">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Monthly Sales</h3>
+              <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={monthlySalesData}>
+                  <XAxis dataKey="month" stroke="#8884d8" />
+                  <YAxis />
+                  <Tooltip />
+                   <Bar dataKey="sales" fill="#8884d8" barSize={30} radius={[8, 8, 0, 0]} />
+                   </BarChart>
+                   </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
